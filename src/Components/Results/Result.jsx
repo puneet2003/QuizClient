@@ -15,7 +15,7 @@ const Result = () => {
 
   const getResult = async () => {
     try {
-      const response = await axios.post(`${process.env.BASE_URL}/get-result`, {
+      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/get-result`, {
         userId: send.userId,
         quizId: send.quizId,
       });

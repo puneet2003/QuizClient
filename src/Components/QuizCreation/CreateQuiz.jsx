@@ -47,7 +47,7 @@ const CreateQuiz = () => {
       return;
     }
     try {
-      const response = await axios.post(`${process.env.BASE_URL}/add-quiz`, {
+      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/add-quiz`, {
         name: name,
         description: desc,
         dateCreated: new Date(),

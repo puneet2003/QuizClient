@@ -16,17 +16,18 @@ const Register = (props) => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
+    console.log(process.env.REACT_APP_BASE_URL);
     e.preventDefault();
     if (role === "user") {
       setisError(false);
-      if (!name || !email || !pass) {
+      if (!name || !email || !pass){
         setError("Something is Missing!");
         setisError(true);
         return;
       }
       try {
         const response = await axios.post(
-          `${process.env.BASE_URL}/register-user`,
+          `${process.env.REACT_APP_BASE_URL}/register-user`,
           {
             name: name,
             email: email,
@@ -62,7 +63,7 @@ const Register = (props) => {
       
       try {
         const response = await axios.post(
-          `${process.env.BASE_URL}/register-admin`,
+          `${process.env.REACT_APP_BASE_URL}/register-admin`,
           {
             name: name,
             email: email,
@@ -82,6 +83,7 @@ const Register = (props) => {
           window.alert("Registered successfully");
         }
       } catch (error) {
+        console.log(error);
         setisError(true);
         console.log(error);
       }

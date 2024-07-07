@@ -33,7 +33,7 @@ const AdminDash = () => {
 
   const deleteQuiz = async (i) => {
     console.log(loginId.quizIds, loginId.quizIds[i]);
-    const response = await axios.post(`${process.env.BASE_URL}/delete-quiz`, {
+    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/delete-quiz`, {
       quizId: loginId.quizIds[i],
     });
 
@@ -45,7 +45,7 @@ const AdminDash = () => {
 
   const getHistory = async () => {
     try {
-      const response = await axios.post(`${process.env.BASE_URL}/get-quizzes`, {
+      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/get-quizzes`, {
         quizIds: loginId.quizIds,
       });
       if (response) {
@@ -59,7 +59,7 @@ const AdminDash = () => {
 
   const viewQuiz = async (i) => {
     console.log(quizDetail[i]._id)
-    const response = await axios.post(`${process.env.BASE_URL}/get-quiz`, {
+    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/get-quiz`, {
       quizId: quizDetail[i]._id
     })
     if (!response) {

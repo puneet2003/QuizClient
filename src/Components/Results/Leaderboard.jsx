@@ -16,7 +16,7 @@ const LeaderBoard = () => {
   const getLeaderBoard = async () => {
     try {
       const response = await axios.post(
-        `${process.env.BASE_URL}/get-leaderboard`,
+        `${process.env.REACT_APP_BASE_URL}/get-leaderboard`,
         {
           quizId: quiz.quizId,
         }

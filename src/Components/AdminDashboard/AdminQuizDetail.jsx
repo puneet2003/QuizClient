@@ -26,7 +26,7 @@ const AdminQuizDetail = () => {
 
   const getHistory = async () => {
     try {
-      const response = await axios.post(`${process.env.BASE_URL}/admin-user-history`, {
+      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/admin-user-history`, {
         quizId: detail.quiz._id
       })
       if (response) {
@@ -34,7 +34,7 @@ const AdminQuizDetail = () => {
         console.log(response.data.result);
       }
       try {
-        const response = await axios.post(`${process.env.BASE_URL}/check-result-published`, {
+        const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/check-result-published`, {
           adminId: detail.adminId,
           quizId: detail.quiz._id
         })
@@ -53,7 +53,7 @@ const AdminQuizDetail = () => {
     detail.quiz.attemptedBy.map((user, i) => userIds.push({ userId: user._id, isAllowedToViewResult: isChecked[i] }))
     // console.log(userIds)
     try {
-      const response = await axios.post(`${process.env.BASE_URL}/publish-result`, {
+      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/publish-result`, {
         adminId: detail.adminId,
         userIds: userIds,
         quizId: detail.quiz._id
@@ -70,7 +70,7 @@ const AdminQuizDetail = () => {
 
   const calculateScore = async () => {
     try {
-      const response = await axios.post(`${process.env.BASE_URL}/calculate-score`, {
+      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/calculate-score`, {
         quizId: detail.quiz._id
       })
       if (response) {

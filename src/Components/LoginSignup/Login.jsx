@@ -35,7 +35,7 @@ const Login = (props) => {
     if (role === "user") {
       // User login logic
       try {
-        const response = await axios.post(`${process.env.BASE_URL}/login-user`, {
+        const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/login-user`, {
           email: email,
           password: pass,
         });
@@ -70,7 +70,7 @@ const Login = (props) => {
     } else {
       // Admin login logic
       try {
-        const response = await axios.post(`${process.env.BASE_URL}/login-admin`, {
+        const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/login-admin`, {
           email: email,
           password: pass,
         });

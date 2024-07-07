@@ -21,7 +21,7 @@ const Quizcode = () => {
   const getHistory = async () => {
     try {
       const response = await axios.post(
-        `${process.env.BASE_URL}/get-userHistory`,
+        `${process.env.REACT_APP_BASE_URL}/get-userHistory`,
         {
           userId: loginId.userId,
         }
@@ -45,7 +45,7 @@ const Quizcode = () => {
     }
 
     // If the user hasn't taken the quiz, proceed to start it
-    const response = await axios.post(`${process.env.BASE_URL}/get-quiz`, {
+    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/get-quiz`, {
       quizId: quizCode,
     });
 
