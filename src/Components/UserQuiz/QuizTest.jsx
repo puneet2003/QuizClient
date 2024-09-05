@@ -219,7 +219,7 @@ const QuizTest = () => {
     const timeTakenInMinutes = Math.floor(timeTakenInSeconds / 60);
     // // console.log(timeTakenInSeconds, timeTakenInMinutes);
     console.log(timeTakenInSeconds);
-    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/save-quiz`, {
+    const response = await axios.post("http://localhost:8000/save-quiz", {
       userId: newDetail.userId,
       quizId: newDetail.quiz._id,
       markedOptions,
