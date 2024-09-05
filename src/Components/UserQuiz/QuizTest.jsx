@@ -5,7 +5,7 @@ import UserQuizContext from "../../Context/UserQuizContext";
 import axios from "axios";
 import "../../Styles/QuizTest.css";
 
-const startTime = new Date();
+let startTime = new Date();
 const markedOptions = [];
 
 const QuizTest = () => {
@@ -78,15 +78,25 @@ const QuizTest = () => {
   };
 
   const handleOptionSelect = (index, option, ind) => {
-    console.log(option);
-    console.log(newDetail.quiz.questions[index].correctAnswer);
+    // console.log(option);
+    // console.log(newDetail.quiz.questions[index].correctAnswer);
     // const newMarkedOptions = [...markedOptions];
     const newOptions = {
       question: newDetail.quiz.questions[index]._id,
       selectedOption: option,
     };
-    // console.log(markedOptions)
-    markedOptions.push(newOptions);
+
+    const existingOptionIndex = markedOptions.findIndex(
+      (markedOption) => markedOption.question === newOptions.question
+    );
+   
+    if (existingOptionIndex !== -1) {
+      // If it exists, update the selected option
+      markedOptions[existingOptionIndex].selectedOption = newOptions.selectedOption;
+    } else {
+      // If it doesn't exist, push the new option
+      markedOptions.push(newOptions);
+    }
     const newAr = [...arr];
     newAr[index] = ind;
     setArr(newAr);
@@ -121,51 +131,44 @@ const QuizTest = () => {
 
   useEffect(() => {
     // Initialize the timer when the component mounts
+    startTime = new Date();
     setTimer(quizDuration);
 
     // Update the timer every second
     const timerInterval = setInterval(() => {
       setTimer((prevTimer) => {
-        if (prevTimer === 0) {
+        if (prevTimer <= 1) {
           setQuizOver(true);
           setPopupVisible(true); // Show the popup when the quiz is over
           clearInterval(timerInterval);
+          submit();
           return 0;
         }
         return prevTimer - 1;
       });
     }, 1000);
 
-    const quizOverTimeout = setTimeout(() => {
-      // setStartTime(new Date());
-      setQuizOver(true);
-      setPopupVisible(true);
-      submit();
-      //   navigate('/submitted')
-      // Clear the interval when the popup is shown
-    }, quizDuration * 1000);
-
     // Clear the interval when the component unmounts
     return () => {
       clearInterval(timerInterval);
-      clearTimeout(quizOverTimeout);
+      
     };
   }, [quizDuration]);
 
   const submit = async () => {
-    console.log("I want to submit the quiz...", markedOptions);
+    // console.log("I want to submit the quiz...", markedOptions);
     const endTime = new Date();
-    console.log("startTime", startTime);
-    console.log("endTime", endTime);
-    const timeTaken = Math.floor((endTime - startTime) / 1000);
+    // console.log("startTime", startTime);
+    // console.log("endTime", endTime);
+
     const timeTakenInSeconds = Math.floor((endTime - startTime) / 1000); // Calculate timeTaken in seconds
     const timeTakenInMinutes = Math.floor(timeTakenInSeconds / 60);
-    console.log(timeTakenInSeconds, timeTakenInMinutes);
+    // console.log(timeTakenInSeconds, timeTakenInMinutes);
     const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/save-quiz`, {
       userId: newDetail.userId,
       quizId: newDetail.quiz._id,
       markedOptions,
-      TimeTaken: timeTakenInMinutes,
+      TimeTaken: timeTakenInSeconds,
     });
     if (response) {
       console.log(response);

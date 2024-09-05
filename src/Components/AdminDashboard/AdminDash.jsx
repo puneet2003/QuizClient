@@ -69,7 +69,7 @@ const AdminDash = () => {
     }
     const detail = {
       adminId: loginId.adminId,
-      quiz: response.data.quiz,
+      quiz: response.data.quiz
     };
     navigate("/detail-quiz", { state: { detail } });
   };

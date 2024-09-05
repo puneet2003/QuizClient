@@ -80,6 +80,22 @@ const AdminQuizDetail = () => {
       console.log('Some Error occured during calculating score', error);
     }
   }
+
+  const formatTime = (seconds) => {
+    // Calculate hours, minutes, and seconds
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+  
+    // Pad the values with leading zeros if necessary
+    const formattedHours = String(hours).padStart(2, '0');
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(secs).padStart(2, '0');
+  
+    // Return formatted time in hh:mm:ss format
+    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+  };
+
   return (
     <div>
       {detail !== undefined ? (
@@ -109,7 +125,10 @@ const AdminQuizDetail = () => {
                   Date :{detail.quiz.dateCreated.split("T")[0]}
                 </div>
                 <div className="quiz-name">
-                  Total Time of Quiz={detail.quiz.duration} mins
+                  Total Time of Quiz= {formatTime(detail.quiz.duration)}
+                </div>
+                <div className="quiz-name">
+                  Quiz Code = {detail.quiz._id}
                 </div>
               </div>
             </div>
@@ -165,7 +184,7 @@ const AdminQuizDetail = () => {
                       <th scope="row">{ij + 1}</th>
                       <td>{usr.name}</td>
 
-                      <td>{usr.TimeTaken} mins</td>
+                      <td>{formatTime(usr.TimeTaken)} </td>
                       <td>{usr.score}</td>
                       <input
                         type="checkbox"

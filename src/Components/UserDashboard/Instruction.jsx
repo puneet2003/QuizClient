@@ -19,6 +19,21 @@ const Instruction = () => {
     navigate("/quiz", { state: { newDetail } });
   };
 
+  const formatTime = (seconds) => {
+    // Calculate hours, minutes, and seconds
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+  
+    // Pad the values with leading zeros if necessary
+    const formattedHours = String(hours).padStart(2, '0');
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(secs).padStart(2, '0');
+  
+    // Return formatted time in hh:mm:ss format
+    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+  };
+
   return (
     <>
       <div
@@ -57,7 +72,7 @@ const Instruction = () => {
             marginTop: "2px",
           }}
         >
-          Time : {quiz.duration} Minutes
+          Time : {formatTime(quiz.duration)}
         </p>
         <hr className="white-line" />
         <h1

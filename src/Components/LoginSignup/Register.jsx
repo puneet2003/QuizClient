@@ -16,7 +16,7 @@ const Register = (props) => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    console.log(process.env.REACT_APP_BASE_URL);
+    // console.log(process.env.REACT_APP_BASE_URL);
     e.preventDefault();
     if (role === "user") {
       setisError(false);
@@ -60,7 +60,7 @@ const Register = (props) => {
       if (!name || !email || !pass) {
         setisError(true);
       }
-      
+      console.log(name);
       try {
         const response = await axios.post(
           `${process.env.REACT_APP_BASE_URL}/register-admin`,
