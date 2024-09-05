@@ -30,31 +30,6 @@ const LeaderBoard = () => {
     }
   };
 
-  const formatTime1 = (sec) => {
-    const hr = Math.floor(sec/3600);
-    const mn = Math.floor(sec/60);
-    const secs = sec%60;
-    return `${String(hr).padStart(2,'0')}:${String(mn).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
-
-  }
-
-  
-  // const formatTime = (seconds) => {
-  //   // Calculate hours, minutes, and seconds
-  //   const hours = Math.floor(seconds / 3600);
-  //   const minutes = Math.floor((seconds % 3600) / 60);
-  //   const secs = seconds % 60;
-  
-  //   // Pad the values with leading zeros if necessary
-  //   const formattedHours = String(hours).padStart(2, '0');
-  //   const formattedMinutes = String(minutes).padStart(2, '0');
-  //   const formattedSeconds = String(secs).padStart(2, '0');
-  
-  //   // Return formatted time in hh:mm:ss format
-  //   return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
-  // };
-
-
   return (
     <div style={{ background: "linear-gradient(rgba(0,0,50,0.7),rgba(0,0,50,0.7))", color: "#fff", minHeight: "89vh" }} >
       <h2 className="leader-h2" style={{ color: "#fff" }}>LeaderBoard </h2>
@@ -77,7 +52,7 @@ const LeaderBoard = () => {
                   <td>{index + 1}</td>
                   <td>{entry.userId.name}</td>
                   <td>{entry.score}</td>
-                  <td>{formatTime1(entry.TimeTaken)}</td>
+                  <td>{entry.TimeTaken}</td>
                 </tr>
               ))}
             </tbody>
